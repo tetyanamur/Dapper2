@@ -16,12 +16,13 @@ namespace DapperInClass
                  .Build();
 
             string connString = config.GetConnectionString("DefaultConnection");
-             IDbConnection conn = new MySqlConnection(connString);
-            var repo = new DapperDepartmentRepository(conn);
-            var departments = repo.GetAllDepartments();
-            foreach (var dept in departments)
+             IDbConnection connection = new MySqlConnection(connString);
+            var repo = new DapperProductRepository(connection);
+            repo.CreateProduct("new stuff", 20, 1);
+            var products = repo.GetAllProducts();
+            foreach (var prod in products)
             {
-                Console.WriteLine($"{ dept.DepartmentId},{dept.Name}" );
+                Console.WriteLine($"{ prod.ProductID},{prod.Name}" );
             }
         }
     }
